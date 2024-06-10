@@ -32,5 +32,4 @@ const handler = (req: NextRequest) =>
           }
         : undefined,
   });
-
 export { handler as GET, handler as POST };
