@@ -1,11 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure,
-} from "~/server/api/trpc";
-import contentModel from "~/server/models/content-model";
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import contentModel from "~/server/models/content.model";
 
 // ------------------------- Schema --------------------------------------
 

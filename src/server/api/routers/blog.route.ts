@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import blogModel from "~/server/models/blog-model";
+import blogModel from "~/server/models/blog.model";
 import { api } from "~/trpc/server";
 
 // ----------------------- Schema --------------------------
@@ -56,10 +56,11 @@ const updateBlogSchema = z
 export const blogRouter = createTRPCRouter({
   create: publicProcedure.input(blogSchema).mutation(async ({ input }) => {
     const blog = await blogModel.create(input);
-    await api.content.update({
-      id: input.content_mongo_id,
-      blog_mongo_id: blog._id.toString(),
-    });
+
+    // await api.content.update({
+    //   id: input.content_mongo_id,
+    //   blog_mongo_id: blog._id.toString(),
+    // });
     return blog._id;
   }),
 
@@ -146,10 +147,10 @@ export const blogRouter = createTRPCRouter({
       }
 
       try {
-        await api.content.update({
-          id: deletedBlog.content_mongo_id,
-          blog_mongo_id: "",
-        });
+        // await api.content.update({
+        //   id: deletedBlog.content_mongo_id,
+        //   blog_mongo_id: "",
+        // });
       } catch (error) {
         console.error("Failed to update associated content:", error);
       }
