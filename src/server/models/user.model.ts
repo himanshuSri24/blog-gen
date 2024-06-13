@@ -1,12 +1,5 @@
 import mongoose from "mongoose";
-
-export interface User {
-  first_name: string;
-  last_name: string;
-  username: string;
-  email: string;
-  password: string;
-}
+import { type User } from "~/server/types/user.type";
 
 const UserSchema = new mongoose.Schema<User>(
   {
