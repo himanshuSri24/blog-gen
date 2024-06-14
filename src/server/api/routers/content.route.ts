@@ -13,6 +13,8 @@ export const contentRouter = createTRPCRouter({
 
   // To get content based on query
   get: publicProcedure.input(getContentInput).query(async ({ input }) => {
+    console.log("Something")
+    console.log(input);
     const content = await getContent(input);
     return content;
   }),
