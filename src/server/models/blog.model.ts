@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface Blog {
-  content_mongo_id: string;
+  content_mongo_id?: mongoose.Schema.Types.ObjectId;
   blog_details: string;
   image_url: string | undefined;
   sources: string | undefined;
@@ -12,7 +12,8 @@ export interface Blog {
 const BlogSchema = new mongoose.Schema<Blog>(
   {
     content_mongo_id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Content",
       required: true,
     },
     blog_details: {

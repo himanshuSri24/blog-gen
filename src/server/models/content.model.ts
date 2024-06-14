@@ -1,17 +1,19 @@
 import mongoose from "mongoose";
 
+
 export interface Content {
-  user_mongo_id: string;
+  user_mongo_id: mongoose.Schema.Types.ObjectId | undefined;
   title: string;
-  blog_mongo_id: string | undefined;
-  linkedin_post_mongo_id: string | undefined;
-  youtube_transcript_mongo_id: string | undefined;
+  blog_mongo_id?: mongoose.Schema.Types.ObjectId;
+  linkedin_post_mongo_id?: mongoose.Schema.Types.ObjectId;
+  youtube_transcript_mongo_id?: mongoose.Schema.Types.ObjectId;
 }
 
 const ContentSchema = new mongoose.Schema<Content>(
   {
     user_mongo_id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
       required: true,
     },
     title: {
@@ -19,15 +21,18 @@ const ContentSchema = new mongoose.Schema<Content>(
       required: true,
     },
     blog_mongo_id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Blog',
       required: false,
     },
     linkedin_post_mongo_id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'LinkedInPost',
       required: false,
     },
     youtube_transcript_mongo_id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'YouTubeTranscript',
       required: false,
     },
   },
