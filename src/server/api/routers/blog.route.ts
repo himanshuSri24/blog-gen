@@ -28,9 +28,10 @@ export const blogRouter = createTRPCRouter({
     return blog;
   }),
 
-  getAll: publicProcedure.input(getBlogsInput).query(async () => {
-    const blogs = await getBlogs({ page: 1, limit: 10 });
-    return blogs;
+  getAll: publicProcedure.input(getBlogsInput).query(async ({input}) => {
+    const { page, limit } = getBlogsInput.parse(input);
+    const contents = await getBlogs({ page, limit });
+    return contents;
   }),
 
 

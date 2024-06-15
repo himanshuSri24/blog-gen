@@ -26,6 +26,25 @@ export const createBlog = async (input: z.infer<typeof createBlogInput>) => {
 };
 
 export const getBlog = async (input: z.infer<typeof getBlogInput>) => {
+
+  if(!input.id && !input.content_mongo_id && !input.from_date && !input.to_date) {
+    throw new TRPCError({
+      code: "BAD_REQUEST",
+      message: "At least one of the following fields is required: id, content_mongo_id, from_date, to_date",
+    });
+  }
+
+  if(input.from_date && !input.to_date) {
+    input.to_date = new Date();
+  }
+
+  if(input.from_date && input.to_date && input.from_date > input.to_date) {
+    throw new TRPCError({
+      code: "BAD_REQUEST",
+      message: "from_date cannot be greater than to_date",
+    });
+  }
+
     const query: {
         _id?: string;
         content_mongo_id?: string;
@@ -113,10 +132,6 @@ export const deleteBlog = async (input: z.infer<typeof deleteBlogInput>) => {
     }
 
     try {
-      // await api.content.update({
-      //   id: deletedBlog.content_mongo_id,
-      //   blog_mongo_id: "",
-      // });
     } catch (error) {
       console.error("Failed to update associated content:", error);
     }

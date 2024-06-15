@@ -16,8 +16,8 @@ export const getUserInput = z.object({
 });
 
 export const getUsersInput = z.object({
-  page: z.number().optional(),
-  limit: z.number().optional(),
+  page: z.number().optional().default(1),
+  limit: z.number().optional().default(10),
 });
 
 export const updateUserInput = z.object({

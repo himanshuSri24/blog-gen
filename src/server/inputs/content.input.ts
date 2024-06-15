@@ -19,13 +19,7 @@ export const getContentInput = z.object({
     youtube_transcript_mongo_id: objectIdSchema.optional(),
     from_date: z.date().optional(),
     to_date: z.date().optional(),
-  })
-  .refine((data) => {
-    // If from_date is provided and to_date is not, set to_date to the current date
-    if (data.from_date && !data.to_date) {
-      data.to_date = new Date();
-    }
-});
+  });
 
 export const getContentsInput = z.object({
   page: z.number().optional().default(1),

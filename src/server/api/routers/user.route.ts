@@ -29,9 +29,10 @@ export const userRouter = createTRPCRouter({
     return user;
   }),
 
-  getAll: publicProcedure.input(getUsersInput).query(async () => {
-    const users = await getUsers({ page: 1, limit: 10 });
-    return users;
+  getAll: publicProcedure.input(getUsersInput).query(async ({input}) => {
+    const { page, limit } = getUsersInput.parse(input);
+    const contents = await getUsers({ page, limit });
+    return contents;
   }),
 
   update: publicProcedure.input(updateUserInput).mutation(async ({ input }) => {

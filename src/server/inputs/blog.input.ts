@@ -14,20 +14,16 @@ export const createBlogInput = z.object({
 });
 
 export const getBlogInput = z.object({
-    id: objectIdSchema,
-    content_mongo_id: objectIdSchema,
+    id: objectIdSchema.optional(),
+    content_mongo_id: objectIdSchema.optional(),
     from_date: z.date().optional(),
     to_date: z.date().optional(),
-}).refine((data) => {
-    // If from_date is provided and to_date is not, set to_date to the current date
-    if (data.from_date && !data.to_date) {
-      data.to_date = new Date();
-    }
-});
+})
+
 
 export const getBlogsInput = z.object({
-  page: z.number().optional(),
-  limit: z.number().optional(),
+  page: z.number().optional().default(1),
+  limit: z.number().optional().default(10),
 });
 
 export const updateBlogInput = z.object({
