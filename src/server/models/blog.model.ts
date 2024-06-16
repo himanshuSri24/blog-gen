@@ -1,18 +1,13 @@
 import mongoose from "mongoose";
+import { type Blog } from "../types/blog.type";
 
-export interface Blog {
-  content_mongo_id: string;
-  blog_details: string;
-  image_url: string | undefined;
-  sources: string | undefined;
-  comment: string | undefined;
-  likes: number | undefined;
-}
+
 
 const BlogSchema = new mongoose.Schema<Blog>(
   {
     content_mongo_id: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Content",
       required: true,
     },
     blog_details: {
