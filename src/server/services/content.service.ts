@@ -16,12 +16,12 @@ export const createContent = async (input: z.infer<typeof createContentInput>) =
 
 export const getContent = async (input: z.infer<typeof getContentInput>) => {
 
-    if (!input.id && !input.user_mongo_id && !input.title && !input.blog_mongo_id && !input.linkedin_post_mongo_id && !input.youtube_transcript_mongo_id && !input.from_date && !input.to_date) {
-      throw new TRPCError({
-        code: "BAD_REQUEST",
-        message: "At least one of the following fields is required: id, user_mongo_id, title, blog_mongo_id, linkedin_post_mongo_id, youtube_transcript_mongo_id, from_date, to_date",
-      });
-    }
+    // if (!input.id && !input.user_mongo_id && !input.title && !input.blog_mongo_id && !input.linkedin_post_mongo_id && !input.youtube_transcript_mongo_id ) {
+    //   throw new TRPCError({
+    //     code: "BAD_REQUEST",
+    //     message: "At least one of the following fields is required: id, user_mongo_id, title, blog_mongo_id, linkedin_post_mongo_id, youtube_transcript_mongo_id",
+    //   });
+    // }
 
     if (input.from_date && !input.to_date) {
       input.to_date = new Date();

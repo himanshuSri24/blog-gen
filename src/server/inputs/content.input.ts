@@ -19,7 +19,10 @@ export const getContentInput = z.object({
     youtube_transcript_mongo_id: objectIdSchema.optional(),
     from_date: z.date().optional(),
     to_date: z.date().optional(),
-  });
+  }).refine((data) => (!data.id && !data.user_mongo_id && !data.title && !data.blog_mongo_id && !data.linkedin_post_mongo_id && !data.youtube_transcript_mongo_id), {
+      message: "At least one of the following fields is required: id, user_mongo_id, title, blog_mongo_id, linkedin_post_mongo_id, youtube_transcript_mongo_id",
+    }
+  );
 
 export const getContentsInput = z.object({
   page: z.number().optional().default(1),

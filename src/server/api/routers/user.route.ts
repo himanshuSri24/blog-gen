@@ -29,7 +29,7 @@ export const userRouter = createTRPCRouter({
     return user;
   }),
 
-  getAll: publicProcedure.input(getUsersInput).query(async ({input}) => {
+  getAll: publicProcedure.input(getUsersInput).query(async ({input}) => { 
     const { page, limit } = getUsersInput.parse(input);
     const contents = await getUsers({ page, limit });
     return contents;
